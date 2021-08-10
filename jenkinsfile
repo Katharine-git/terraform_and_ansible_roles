@@ -10,24 +10,33 @@ pipeline{
             stage('checkout') {
                 steps {
                  
-                        git " "
+                    git 'https://github.com/Katharine-git/terraform_and_ansible_roles.git'
                 }
                 
             }
             stage('Terraform init'){
                 steps{
-                    sh label: '', script: 'terraform init'
+                    script: cd terraform
+                    script: 'terraform init'
                 }
             }
             stage('Terraform plan'){
                 steps{
-                    sh label: '', script: 'terraform plan'
+                    script: cd terraform
+                    script: 'terraform plan'
                 }
             }
             stage('terraform apply'){
                 steps{
-                    sh label: '', script: 'terraform apply --auto-approve'
+                    script: cd terraform
+                    script: 'terraform apply --auto-approve'
                 }
+            }
+            stage{
+                steps('invoke ansiblle-playbook'){
+                    ansiblePlaybook credentialsId: 'aws-private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.ini', playbook: 'roles.yml'
+                }
+            
             }
         }
 }
