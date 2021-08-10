@@ -23,11 +23,6 @@ pipeline{
                 
             }
         }
-        stage('invoke ansiblle-playbook'){
-            steps{
-                ansiblePlaybook credentialsId: 'aws-private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.ini', playbook: 'roles.yml'
-            }
         
-        }
     }
 }
