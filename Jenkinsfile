@@ -16,7 +16,7 @@ pipeline{
         stage('Terraform init'){
             steps{
                 dir('terraform') {
-                    sh 'terraform init -migrate-state'
+                    sh 'terraform init --auto-approve'
                     sh 'terraform plan' 
                     sh 'terraform apply --auto-approve'                  
                 }
