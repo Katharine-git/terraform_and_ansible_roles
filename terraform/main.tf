@@ -3,6 +3,16 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+#State locking
+terraform {
+  backend "s3" {
+    bucket = "iactools"
+    key    = "terraform_state/terraform.tfstate"
+    region = "us-east-1"
+    dynamodb_table = "terraform-state-lock"
+  }
+}
+
 #VPC
 
 resource "aws_vpc" "ust_Katharine" {
