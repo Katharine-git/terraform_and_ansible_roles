@@ -15,18 +15,17 @@ pipeline{
         }  
         stage('Terraform init'){
             steps{
-                sh label: '', script: 'cd terraform'
-                sh label: '', script: 'terraform init'
+                sh label: '', script: './terraform terraform init'
             }
         }
         stage('Terraform plan'){
             steps{
-                sh label: '', script: 'terraform plan'
+                sh label: '', script: './terraform terraform plan'
             }
         }
         stage('terraform apply'){
             steps{
-                sh label: '', script: 'terraform apply --auto-approve'
+                sh label: '', script: './terraform terraform apply --auto-approve'
             }
         }
 
