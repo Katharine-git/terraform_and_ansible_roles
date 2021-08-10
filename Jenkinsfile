@@ -15,20 +15,14 @@ pipeline{
         }  
         stage('Terraform init'){
             steps{
-                sh label: '', script: './terraform/ terraform init'
+                dir('terraform') {
+                    sh 'terraform init'
+                    sh 'terraform plan' 
+                    sh 'terraform apply --auto-approve'                  
+                }
+                
             }
         }
-        stage('Terraform plan'){
-            steps{
-                sh label: '', script: './terraform/ terraform plan'
-            }
-        }
-        stage('terraform apply'){
-            steps{
-                sh label: '', script: './terraform/ terraform apply --auto-approve'
-            }
-        }
-
         stage('invoke ansiblle-playbook'){
             steps{
                 ansiblePlaybook credentialsId: 'aws-private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.ini', playbook: 'roles.yml'
