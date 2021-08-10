@@ -16,7 +16,7 @@ pipeline{
         stage('Terraform init'){
             steps{
                 dir('terraform') {
-                    sh 'terraform init --auto-approve'
+                    sh 'terraform init -force-copy'
                     sh 'terraform plan' 
                     sh 'terraform apply --auto-approve'                  
                 }
