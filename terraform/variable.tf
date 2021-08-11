@@ -19,5 +19,23 @@ variable aws_subnet_id{
 variable private_ip{
     default = "172.16.10.100"
 }
+variable rt_cidr{
+    default = "0.0.0.0/0"
+}
+variable ingress_1{
+    default = "80"
+}
+variable ingress_2{
+    default = "22"
+}
+variable ingress_3{
+    default = "443"
+}
+variable ingress_4{
+    default = "90"
+}
+variable ebs_volume{
+    default = "10"
+}
 
 

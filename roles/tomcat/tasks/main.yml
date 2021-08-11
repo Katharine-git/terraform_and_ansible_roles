@@ -35,7 +35,15 @@
   template:
     src: servers.xml.j2
     dest: /opt/tomcat/conf/server.xml
+  notify: restart tomcat
 
-- name: Start and enable tomcat
-  shell: nohup sh /opt/tomcat/bin/startup.sh &
-  become: true
+- name: Install Tomcat init script
+  copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
+
+- name: Start Tomcat
+  service: name=tomcat state=started enabled=yes
+
+- name: deploy iptables rules
+  template: src=iptables-save dest=/etc/sysconfig/iptables
+  when: "ansible_os_family == 'RedHat' and ansible_distribution_major_version == '6'"
+  notify: restart iptables

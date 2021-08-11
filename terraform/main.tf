@@ -53,7 +53,7 @@ resource "aws_route_table" "rt" {
   vpc_id = aws_vpc.ust_Katharine.id
 
   route {
-      cidr_block = "0.0.0.0/0"
+      cidr_block = var.rt_cidr
       gateway_id = aws_internet_gateway.gw.id
     }
 
@@ -89,32 +89,29 @@ resource "aws_security_group" "ust_sg" {
   vpc_id = aws_vpc.ust_Katharine.id
 
   ingress {
-    description = "HTTP"
-    from_port   = 80
-    to_port     = 80
+    from_port   = var.ingress_1
+    to_port     = var.ingress_1
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    description = "SSH"
-    from_port   = 22
-    to_port     = 22
+    from_port   = var.ingress_2
+    to_port     = var.ingress_2
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    description = "HTTPS"
-    from_port   = 443
-    to_port     = 443
+    from_port   = var.ingress_3
+    to_port     = var.ingress_3
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    from_port   = 90
-    to_port     = 90
+    from_port   = var.ingress_4
+    to_port     = var.ingress_4
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -144,10 +141,10 @@ resource "aws_network_interface" "ani" {
 
 resource "aws_ebs_volume" "ebs" {
   availability_zone = var.aws_az
-  size              = 10
+  size              = var.ebs_volume
 
   tags = {
-    Name = "ust_volume"
+    Name = "ust_volume_1"
   }
 }
 
