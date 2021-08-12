@@ -31,19 +31,28 @@
     path: "{{ tomcat_archive_dest }}"
     state: absent
 
+#- name: Symlink install directory
+#  file: src=/opt/apache-tomcat-10.0.0 path=/usr/share/tomcat state=link
+
+- name: Change ownership of Tomcat installation
+  file: path=/opt/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
+
 - name: copy config files
   template:
     src: server.xml.j2
     dest: /opt/tomcat/conf/server.xml
-  notify: restart tomcat
 
-- name: Install Tomcat init script
-  copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
+- name: Start and enable tomcat
+  shell: nohup sh /opt/tomcat/bin/startup.sh &
+  become: true
 
-- name: Start Tomcat
-  service: name=tomcat state=started enabled=yes
+#- name: Install Tomcat init script
+#  copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
 
-- name: deploy iptables rules
-  template: src=iptables-save dest=/etc/sysconfig/iptables
-  when: "ansible_os_family == 'RedHat' and ansible_distribution_major_version == '6'"
-  notify: restart iptables
+#- name: Start Tomcat
+#  service: name=tomcat state=started enabled=yes
+
+#- name: deploy iptables rules
+#  template: src=iptables-save dest=/etc/sysconfig/iptables
+#  when: "ansible_os_family == 'RedHat' and ansible_distribution_major_version == '6'"
+#  notify: restart iptables

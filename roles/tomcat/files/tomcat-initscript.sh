@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #CATALINA_HOME is the location of the bin files of Tomcat  
 export CATALINA_HOME=/usr/share/tomcat  
  
