@@ -4,9 +4,6 @@ variable profile_type{
 variable region{
     default = "us-east-1"
 }
-variable state_file{
-    default = katterraform.tfstate
-}
 variable vpc_name{
     default = "ust_VPC"
 }
