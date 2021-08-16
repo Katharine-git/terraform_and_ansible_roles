@@ -32,7 +32,7 @@ variable ingress_3{
     default = "443"
 }
 variable ingress_4{
-    default = "8090"
+    default = "8095"
 }
 variable ebs_volume{
     default = "10"
