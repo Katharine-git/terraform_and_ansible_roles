@@ -7,7 +7,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "iactools"
-    key    = "terraform_state/var.state_file"
+    key    = "terraform_state/katterraform.tfstate"
     region = "us-east-1"
     dynamodb_table = "terraform-state-lock"
   }
