@@ -139,14 +139,25 @@ resource "aws_network_interface" "ani" {
 
 #ebs_block_size
 
-resource "aws_ebs_volume" "ebs" {
-  availability_zone = var.aws_az
-  size              = var.ebs_volume
-
+root_block_device {
+  volume_type = "gp2"
+  volume_size = 10
+  delete_on_termination = true
+  
   tags = {
-    Name = "ust_volume_1"
-  }
-}
+     Name = "vm-dev01"
+      }
+    }
+
+
+#resource "aws_ebs_volume" "ebs" {
+#  availability_zone = var.aws_az
+#  size              = var.ebs_volume
+
+#  tags = {
+#    Name = "ust_volume_1"
+#  }
+#}
 
 #Instance
 
