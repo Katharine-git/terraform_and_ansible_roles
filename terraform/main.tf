@@ -1,13 +1,13 @@
 provider "aws" {
-  profile = "default"
-  region  = "us-east-1"
+  profile = var.profile_type
+  region  = var.region
 }
 
 #State locking
 terraform {
   backend "s3" {
     bucket = "iactools"
-    key    = "terraform_state/katterraform.tfstate"
+    key    = "terraform_state/var.state_file"
     region = "us-east-1"
     dynamodb_table = "terraform-state-lock"
   }
@@ -19,7 +19,7 @@ resource "aws_vpc" "ust_Katharine" {
   cidr_block = var.vpc_cidr_block
 
   tags = {
-    Name = "ust_VPC"
+    Name = var.vpc_name
   }
 
 }
@@ -32,7 +32,7 @@ resource "aws_subnet" "ust_subnet" {
   availability_zone = var.aws_az
 
   tags = {
-    Name = "ust_subnet"
+    Name = var.subnet_name
   }
 
 }
@@ -43,7 +43,7 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.ust_Katharine.id
 
   tags = {
-    Name = "ust_gw"
+    Name = var.gw_name
   }
 }
 
@@ -58,7 +58,7 @@ resource "aws_route_table" "rt" {
     }
 
   tags = {
-    Name = "ust_rt"
+    Name = var.rt_name
   }
 }
 
@@ -77,7 +77,7 @@ resource "aws_eip" "ust_eip" {
   associate_with_private_ip = var.private_ip
 
   tags = {
-    Name = "ust_eip"
+    Name = var.eip_name
   }
 
 }
@@ -92,35 +92,35 @@ resource "aws_security_group" "ust_sg" {
     from_port   = var.ingress_1
     to_port     = var.ingress_1
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = var.cidr
   }
 
   ingress {
     from_port   = var.ingress_2
     to_port     = var.ingress_2
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = var.cidr
   }
 
   ingress {
     from_port   = var.ingress_3
     to_port     = var.ingress_3
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = var.cidr
   }
 
   ingress {
     from_port   = var.ingress_4
     to_port     = var.ingress_4
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = var.cidr
   }
 
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = -1
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = var.cidr
   }
 }
 
@@ -132,7 +132,7 @@ resource "aws_network_interface" "ani" {
   security_groups = [aws_security_group.ust_sg.id]
 
   tags = {
-    Name = "ust_ni"
+    Name = var.ani_name
   }
 
 }

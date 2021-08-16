@@ -1,3 +1,30 @@
+variable profile_type{
+    default = "default"
+}
+variable region{
+    default = "us-east-1"
+}
+variable state_file{
+    default = katterraform.tfstate
+}
+variable vpc_name{
+    default = "ust_VPC"
+}
+variable subnet_name{
+    default = "ust_subnet"
+}
+variable gw_name{
+    default = "ust_gw"
+}
+variable rt_name{
+    default = "ust_rt"
+}
+variable eip_name{
+    default = "ust_eip"
+}
+variable ani_name{
+    default = "ust_ni"
+}
 variable vpc_cidr_block{
     default = "172.16.0.0/16"
 }
@@ -39,5 +66,8 @@ variable ebs_volume{
 }
 variable instance_type{
     default = "t2.micro"
+}
+variable cidr{
+    default = ["0.0.0.0/0"]
 }
 
