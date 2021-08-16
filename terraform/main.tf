@@ -161,6 +161,7 @@ resource "aws_instance" "ustInstance" {
      Name = "Linux-VM"
   }
 }
+
 #ebs_block_size
 
 root_block_device {
