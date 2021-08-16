@@ -37,5 +37,7 @@ variable ingress_4{
 variable ebs_volume{
     default = "10"
 }
-
+variable instance_type{
+    default = "t2.micro"
+}
 
