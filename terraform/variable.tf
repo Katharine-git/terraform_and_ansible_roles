@@ -25,6 +25,9 @@ variable eip_name{
 variable ani_name{
     default = "ust_ni"
 }
+variable instance_name{
+    default = "Linux-VM"
+}
 variable vpc_cidr_block{
     default = "172.16.0.0/16"
 }
