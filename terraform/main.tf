@@ -158,7 +158,7 @@ resource "aws_instance" "ustInstance" {
      device_index = 0
   }
    tags = {
-     Name = "Linux-VM"
+     Name = var.instance_name
   }
 }
 
