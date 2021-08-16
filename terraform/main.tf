@@ -137,18 +137,6 @@ resource "aws_network_interface" "ani" {
 
 }
 
-#ebs_block_size
-
-root_block_device {
-  volume_type = "gp2"
-  volume_size = 10
-  delete_on_termination = true
-  
-  tags = {
-     Name = "vm-dev01"
-      }
-    }
-
 
 #resource "aws_ebs_volume" "ebs" {
 #  availability_zone = var.aws_az
@@ -173,6 +161,17 @@ resource "aws_instance" "ustInstance" {
      Name = "Linux-VM"
   }
 }
+#ebs_block_size
+
+root_block_device {
+  volume_type = "gp2"
+  volume_size = 10
+  delete_on_termination = true
+  
+  tags = {
+     Name = "vm-dev01"
+      }
+    }
 
 
 
