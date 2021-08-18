@@ -1,5 +1,0 @@
-- name: install tomcat
-  hosts: centos
-  become: true
-  roles:
-    - tomcat
