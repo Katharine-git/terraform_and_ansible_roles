@@ -167,17 +167,7 @@ resource "aws_ebs_volume" "ebs" {
     Name = "ust_volume_1"
   }
 }
-#ebs_block_size
 
-#root_block_device {
-#  volume_type = "gp2"
-#  volume_size = 10
-#  delete_on_termination = true
-  
-#  tags = {
-#     Name = "vm-dev01"
-#      }
-#    }
 
 
 
