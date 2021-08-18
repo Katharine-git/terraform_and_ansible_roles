@@ -136,16 +136,13 @@ resource "aws_network_interface" "ani" {
   }
 
 }
+#ebs_volume attachment
 
-
-#resource "aws_ebs_volume" "ebs" {
-#  availability_zone = var.aws_az
-#  size              = var.ebs_volume
-
-#  tags = {
-#    Name = "ust_volume_1"
-#  }
-#}
+resource "aws_volume_attachment" "ebs_att" {
+  device_name = "/dev/sdh"
+  volume_id   = aws_ebs_volume.ebs.id
+  instance_id = aws_instance.ustInstance.id
+}
 
 #Instance
 
@@ -162,6 +159,14 @@ resource "aws_instance" "ustInstance" {
   }
 }
 
+resource "aws_ebs_volume" "ebs" {
+  availability_zone = var.aws_az
+  size              = var.ebs_volume
+
+  tags = {
+    Name = "ust_volume_1"
+  }
+}
 #ebs_block_size
 
 #root_block_device {
