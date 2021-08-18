@@ -40,9 +40,6 @@ variable aws_ami{
 variable aws_key_name{
     default = "myKey"
 }
-variable aws_subnet_id{
-    default = "subnet-0de6381deb870a130"
-}
 variable private_ip{
     default = "172.16.10.100"
 }
