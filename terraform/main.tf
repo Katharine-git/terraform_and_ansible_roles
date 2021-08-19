@@ -159,6 +159,8 @@ resource "aws_instance" "ustInstance" {
   }
 }
 
+#EBS_Volume
+
 resource "aws_ebs_volume" "ebs" {
   availability_zone = var.aws_az
   size              = var.ebs_volume
